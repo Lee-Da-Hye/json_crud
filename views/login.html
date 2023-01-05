@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>login</h1>
+    <input type="text" id="userid" name="userid" placeholder="userid">
+    <input type="text" id="userpwd" name="userpwd" placeholder="userpwd">
+    <button class="loginBtn">로그인</button>
+
+    <script>
+        document.querySelector('.loginBtn').addEventListener('click', async ()=>{
+            const user = {userid : userid.value, userpwd : userpwd}
+
+            try{
+                const response = await fatch('http://localhost:3000/login');
+                const data = await response.json();
+
+                if(!data.success){
+                    //alert('아이디 또는 비밀번호를 확인하세요.');
+                    location.href = data.url;
+                }else{
+                    document.cookie = `userid:${data.userid}`
+                }
+            } catch(err){
+
+            }
+
+        })
+    </script>
+</body>
+</html>
